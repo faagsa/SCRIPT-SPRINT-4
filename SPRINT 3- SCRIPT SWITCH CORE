@@ -1,0 +1,184 @@
+enable
+configure terminal
+hostname SW-CORE
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS!"
+enable secret SenhadaEnable
+ip domain-name sprint3.local
+crypto key generate rsa general-keys modulus 1024
+username joaoabreu privilege 15 secret joaoabreu
+username gabrielpereira privilege 15 secret gabrielpereira
+username lucasrodrigues privilege 15 secret lucasrodrigues
+username paulojunior privilege 15 secret paulojunior
+username PedroLucca privilege 15 secret SenhaLucca
+username AndreJesus privilege 15 secret SenhaJesus
+username KevinWitt privilege 15 secret SenhaWitt
+username MarcosTeles privilege 15 secret SenhaTeles
+username JoaoSilva privilege 15 secret JoaoSilva1
+username GuilhermeCastro privilege 15 secret GuilhermeCastro1
+username LucasCoutinho privilege 15 secret LucasCoutinho1
+username ElisafSilva privilege 15 secret ElisafSilva1
+username juliolima privilege 15 secret SenhaJulio
+username andrecaires privilege 15 secret SenhaCaires
+username leonardomanhani privilege 15 secret SenhaLeonardo
+username henrique privilege 15 secret SenhaHenrique
+username erickgrupo5 privilege 15 secret erick123
+username joaogrupo5 privilege 15 secret joao1234
+username viniciusgrupo5 privilege 15 secret vinicius123
+username thomasgrupo5 privilege 15 secret thomas123
+username FabricioGomes privilege 15 secret Untitled01
+username FagnerSantos privilege 15 secret Untitled02
+username FernandoOliveira privilege 15 secret Untitled03
+username HigorSa privilege 15 secret Untitled04
+username Cleiton privilege 15 secret Cleiton@15
+username Rafael privilege 15 secret Rafael@15
+username Caio privilege 15 secret Caio@155
+username Alex privilege 15 secret Alex@155
+username Wanderson.Santos privilege 15 secret Wanderson@15
+username Willian.Ladeira privilege 15 secret Willian@15
+username Rai.alves privilege 15 secret Rai@15
+username Gabriel.Silva privilege 15 secret Gabriel@15
+line console 0
+password SenhadaConsole
+login
+exit
+line vty 0 15
+transport input ssh
+exec-timeout 5
+login local
+exit
+service password-encryption
+interface vlan 101
+ip address 192.168.254.254 255.255.255.0
+no shutdown
+description INTERFACE DE GERENCIMANTO
+exit
+ip default-gateway 192.168.254.1
+vlan 11
+name GRUPO-01
+vlan 12
+name GRUPO-02
+vlan 13
+name GRUPO-03
+vlan 14
+name GRUPO-04
+vlan 15
+name GRUPO-05
+vlan 16
+name GRUPO-06
+vlan 17
+name GRUPO-07
+vlan 18
+name GRUPO-08
+vlan 101
+name DISPOSITIVOS-GRP1
+vlan 102
+name DISPOSITIVOS-GRP2
+vlan 103
+name DISPOSITIVOS-GRP3
+vlan 104
+name DISPOSITIVOS-GRP4
+vlan 105
+name DISPOSITIVOS-GRP5
+vlan 106
+name DISPOSITIVOS-GRP6
+vlan 107
+name DISPOSITIVOS-GRP7
+vlan 108
+name DISPOSITIVOS-GRP8
+interface f0/11
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK RT-01
+exit
+interface f0/12
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK RT-02
+exit
+interface f0/13
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK RT-03
+exit
+interface f0/14
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK RT-04
+exit
+interface f0/01
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK SWITCH GRUPO-1
+exit
+interface f0/02
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK SWITCH GRUPO-2
+exit
+interface f0/03
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK SWITCH GRUPO-3
+exit
+interface f0/04
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK SWITCH GRUPO-4
+exit
+interface f0/05
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK SWITCH GRUPO-5
+exit
+interface f0/06
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK SWITCH GRUPO-6
+exit
+interface f0/07
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK SWITCH GRUPO-7
+exit
+interface f0/08
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,13,14,15,16,17,18,99,101,102,103,104,105,106,107,108
+description INTERFACE TRUNK SWITCH GRUPO-8
+exit
+interface f0/21
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 11,12,99,101,102
+description INTERFACE TRUNK SRV-01 GRUPO 1 E 2
+exit
+interface f0/22
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 13,14,99,103,104
+description INTERFACE TRUNK SRV-01 GRUPO 3 E 4
+exit
+interface f0/23
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 15,16,99,105,106
+description INTERFACE TRUNK SRV-01 GRUPO 5 E 6
+exit
+interface f0/24
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 17,18,99,107,108
+description INTERFACE TRUNK SRV-01 GRUPO 7 E 8
+exit
+do wr

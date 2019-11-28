@@ -1,0 +1,51 @@
+enable
+configure terminal
+hostname SW01-GRP5
+banner motd "acesso apenas para pessoas autorizadas"
+enable secret SenhadaEnable
+service password-encryption
+ip domain-name grupo5.local
+crypto key generate rsa general-keys modulus 1024
+username erickgrupo5 privilege 15 secret erick123
+username joaogrupo5 privilege 15 secret joao1234
+username viniciusgrupo5 privilege 15 secret vinicius123
+username thomasgrupo5 privilege 15 secret thomas123
+line console 0
+password SenhadaConsole
+login local
+exit
+line vty 0 15
+transport input ssh
+exec-timeout 5
+login local
+exit
+vlan 15
+name vlan15
+exit
+vlan 105
+exit
+vlan16
+exit
+vlan106
+interface f0/1
+switchport mode access
+switchport access vlan 15
+description pc-0
+exit
+interface f0/3
+switchport mode access
+switchport access vlan 15
+description pc-1
+exit
+interface vlan 105
+ip address 192.168.250.253 255.255.255.0
+description interface de gerenciamento
+no shutdown
+exit
+interface fastethernet0/23
+switchport mode trunk
+switchport trunk allowed vlan 15,99,105
+switchport trunk native vlan 99
+exit
+ip default-gateway 192.168.250.1
+do wr

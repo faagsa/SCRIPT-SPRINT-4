@@ -1,0 +1,55 @@
+enable
+configure terminal
+hostname RT-GP56
+banner motd "acesso apenas para pessoas autorizadas"
+enable secret SenhadaEnable
+security passwords min-length 8
+login block-for 240 attempts 7 within 600
+username FabricioGomes privilege 15 secret Untitled01
+username FagnerSantos privilege 15 secret Untitled02
+username FernandoOliveira privilege 15 secret Untitled03
+username HigorSa privilege 15 secret Untitled04
+username erickgrupo5 privilege 15 secret erick123
+username joaogrupo5 privilege 15 secret joao1234
+username viniciusgrupo5 privilege 15 secret vinicius123
+username thomasgrupo5 privilege 15 secret thomas123
+ip domain-name grupo6.local
+crypto key generate rsa general-keys modulus 1024
+line console 0
+password SenhadaConsole
+login
+exec-timeout 5
+line vty 0 15
+transport input ssh
+login local
+exec-timeout 5
+exit
+service password-encryption
+interface gigabitethernet0/0
+no shutdown
+description CONEXAO COM SWITCH-CORE
+exit
+interface gigabitethernet 0/0.16
+encapsulation dot1q 16
+ip address 192.168.16.1 255.255.255.0
+ip helper-address 192.168.249.6
+description interface vlan 16-GRUPO6
+exit
+interface gigabitethernet0/0.106
+encapsulation dot1q 106
+ip address 192.168.249.1 255.255.255.0
+ip helper-address 192.168.249.6
+description dispositivo srv 106-GRUPO6
+exit
+interface g0/0.15
+encapsulation dot1Q 15
+ip address 192.168.15.1 255.255.255.0
+ip helper-address 192.168.250.6
+description VLAN 15-GRUPO5
+exit 
+interface g0/0.105
+encapsulation dot1Q 105
+ip address 192.168.250.1 255.255.255.0
+ip helper-address 192.168.250.6
+description dispositivo srv 105-GRUPO5
+do wr

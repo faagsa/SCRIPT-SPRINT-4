@@ -1,0 +1,48 @@
+enable
+configure terminal
+hostname SW1
+banner motd "acesso apenas para pessoas autorizadas"
+enable secret SenhadaEnable
+service password-encryption
+ip domain-name grupo6.local
+crypto key generate rsa general-keys modulus 1024
+username FabricioGomes privilege 15 secret Untitled01
+username FagnerSantos privilege 15 secret Untitled02
+username FernandoOliveira privilege 15 secret Untitled03
+username HigorSa privilege 15 secret Untitled04
+line console 0
+password SenhadaConsole
+login
+exit
+line vty 0 15
+transport input ssh
+exec-timeout 5
+login local
+exit
+vlan 16
+name vlan16
+exit
+vlan 106
+exit
+interface f0/1
+switchport mode access
+switchport access vlan 16
+description pc-0
+exit
+interface f0/3
+switchport mode access
+switchport access vlan 16
+description pc-1
+exit
+interface vlan 106
+ip address 192.168.249.253 255.255.255.0
+description interface de gerenciamento
+no shutdown
+exit
+interface fastethernet0/23
+switchport mode trunk
+switchport trunk allowed vlan 16,99,106
+switchport trunk native vlan 99
+exit
+ip default-gateway 192.168.249.1
+do wr
